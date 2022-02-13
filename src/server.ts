@@ -1,15 +1,18 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 const app: express.Application = express();
-const address: string = '0.0.0.0:3000';
+const port = 5050;
+const address: string = `127.0.0.1:${port}`;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get('/', function (req: Request, res: Response) {
-  res.send('Hello World!');
+  res.send('Welcome to the API!');
 });
 
-app.listen(3000, function () {
-  console.log(`starting app on: ${address}`);
+app.listen(port, function () {
+  console.log(`Server started running on ${address}`);
 });
