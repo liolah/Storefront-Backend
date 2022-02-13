@@ -17,13 +17,14 @@ const show = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   try {
     const newUser: InputUser = {
-      firstName: req.query.firstName as string,
-      lastName: req.query.lastName as string,
-      password: req.query.password as string
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      password: req.body.password
     };
-
+    
     // const validatedUser = validatedUser(newUser);
-
+    
+    console.log(req.body);
     const createdUser = await user.create(newUser);
     res.json(createdUser);
   } catch (err) {

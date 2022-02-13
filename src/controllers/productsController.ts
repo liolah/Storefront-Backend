@@ -17,9 +17,9 @@ const show = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   try {
     const newProduct: InputProduct = {
-      name: req.query.name as string,
-      price: req.query.price as unknown as number,
-      category: req.query.category as string,
+      name: req.body.name as string,
+      price: req.body.price as unknown as number,
+      category: req.body.category as string,
     };
 
     // const validatedProduct = validatedProduct(newProduct);
