@@ -1,11 +1,5 @@
 import db from '../config/db';
-
-export type Product = {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-};
+import { Product, InputProduct } from '../@types/products';
 
 export class ProductModel {
   async index(): Promise<Product[]> {
@@ -38,7 +32,7 @@ export class ProductModel {
     }
   }
 
-  async create(p: Product): Promise<Product> {
+  async create(p: InputProduct): Promise<Product> {
     try {
       const connection = await db.connect();
       const sql = `INSERT INTO Products (name, price, category) VALUES (${p.name}, ${p.price}, ${p.category})`;

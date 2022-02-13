@@ -11,6 +11,6 @@ const db = new pg_1.Pool({
     host: env.POSTGRES_HOST,
     database: env.POSTGRES_DB,
     user: env.POSTGRES_USER,
-    password: env.POSTGRES_PASS,
+    password: env.POSTGRES_PASSWORD,
 });
 exports.default = db;

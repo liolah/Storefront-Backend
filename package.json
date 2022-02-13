@@ -1,10 +1,10 @@
 {
   "name": "storefront_backend",
-  "version": "0.5.6",
+  "version": "0.8.7",
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "node src/server.ts",
+    "start": "nodemon src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
     "test": "jasmine-ts",
     "tsc": "tsc",

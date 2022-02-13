@@ -1,6 +1,6 @@
-import express, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { UserModel } from '../models/user';
-import { User } from '../@types/users';
+import { InputUser } from '../@types/users';
 
 const user = new UserModel();
 
@@ -10,21 +10,21 @@ const index = async (_req: Request, res: Response) => {
 };
 
 const show = async (req: Request, res: Response) => {
-  const requestedUser = await user.show(req.query.id as string);
+  const requestedUser = await user.show(req.params.userId);
   res.json(requestedUser);
 };
 
 const create = async (req: Request, res: Response) => {
   try {
-    const newUser: User = {
-      name: req.query.name as string,
-      price: req.query.price as unknown as number,
-      category: req.query.category as string,
+    const newUser: InputUser = {
+      firstName: req.query.firstName as string,
+      lastName: req.query.lastName as string,
+      password: req.query.password as string
     };
 
     // const validatedUser = validatedUser(newUser);
 
-    const createdUser = await User.create(newUser);
+    const createdUser = await user.create(newUser);
     res.json(createdUser);
   } catch (err) {
     res.status(400);
@@ -33,7 +33,8 @@ const create = async (req: Request, res: Response) => {
 };
 
 const destroy = async (req: Request, res: Response) => {
-  const destroyedUser = await User.destroy(req.query.id as string);
+  const destroyedUser = await user.destroy(req.params.userId);
 };
 
+export { index, show, create, destroy };
 export default { index, show, create, destroy };

@@ -1,5 +1,5 @@
 import db from '../config/db';
-import { Product } from '../models/product';
+import { Product } from '../@types/products';
 
 async function getPopularProducts(x: string): Promise<Product[]> {
   try {
@@ -33,4 +33,5 @@ async function getProductsByCategory(c: string): Promise<Product[]> {
   }
 }
 
+export { getPopularProducts, getProductsByCategory };
 export default { getPopularProducts, getProductsByCategory };

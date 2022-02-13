@@ -1,12 +1,6 @@
 import db from '../config/db';
-import { Order, OrderModel } from '../models/order';
-
-export type DetailedOrder = {
-  id: number;
-  userId: number;
-  products: { id: number; quantity: number }[];
-  status: string;
-};
+import { OrderModel } from '../models/order';
+import { DetailedOrder } from '../@types/orders';
 
 const order = new OrderModel();
 
@@ -59,3 +53,6 @@ async function completedOrders(id: string): Promise<DetailedOrder[]> {
     throw new Error(`An error has occurred while retrieving completed orders. Error: ${err}`);
   }
 }
+
+export { getOrderByUserId, completedOrders};
+export default { getOrderByUserId, completedOrders};

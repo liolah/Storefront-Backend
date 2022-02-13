@@ -1,10 +1,5 @@
 import db from '../config/db';
-
-export type Order = {
-  id: number;
-  userId: number;
-  status: string;
-};
+import { Order } from '../@types/orders';
 
 export class OrderModel {
   async index(): Promise<Order[]> {

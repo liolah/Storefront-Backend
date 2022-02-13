@@ -3,57 +3,56 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModel = void 0;
+exports.ProductModel = void 0;
 const db_1 = __importDefault(require("../config/db"));
-class UserModel {
+class ProductModel {
     async index() {
         try {
             const connection = await db_1.default.connect();
-            const sql = 'SELECT * FROM users';
+            const sql = 'SELECT * FROM products';
             const results = await connection.query(sql);
             connection.release();
             return results.rows;
         }
         catch (err) {
-            throw new Error(`An error has occurred while retrieving users. Error: ${err}`);
+            throw new Error(`An error has occurred while retrieving products. Error: ${err}`);
         }
     }
     async show(id) {
         try {
             const connection = await db_1.default.connect();
-            const sql = `SELECT * FROM users WHERE id =${id}`;
+            const sql = `SELECT * FROM Products WHERE id =${id}`;
             const results = await connection.query(sql);
             connection.release();
             return results.rows[0];
         }
         catch (err) {
-            throw new Error(`An error has occurred while retrieving user with user_id of ${id}. Error: ${err}`);
+            throw new Error(`An error has occurred while retrieving product ${id}. Error: ${err}`);
         }
     }
-    async create(u) {
+    async create(p) {
         try {
             const connection = await db_1.default.connect();
-            // TODO: encrypt the password
-            const sql = `INSERT INTO users (first_name, last_name, password) VALUES (${u.firstName}, ${u.lastName}, ${u.password})`;
+            const sql = `INSERT INTO Products (name, price, category) VALUES (${p.name}, ${p.price}, ${p.category})`;
             const results = await connection.query(sql);
             connection.release();
             return results.rows[0];
         }
         catch (err) {
-            throw new Error(`An error has occurred while creating a new user. Error: ${err}`);
+            throw new Error(`An error has occurred while creating a new product. Error: ${err}`);
         }
     }
     async destroy(id) {
         try {
             const connection = await db_1.default.connect();
-            const sql = `DELETE FROM users WHERE id = ${id}`;
-            const deletedUser = await connection.query(sql);
+            const sql = `DELETE FROM products WHERE id = ${id}`;
+            const deletedProduct = await connection.query(sql);
             connection.release();
-            return deletedUser.rows[0];
+            return deletedProduct.rows[0];
         }
         catch (err) {
-            throw new Error(`An error has occurred while deleting user with user_id of ${id}. Error: ${err}`);
+            throw new Error(`An error has occurred while deleting product ${id}. Error: ${err}`);
         }
     }
 }
-exports.UserModel = UserModel;
+exports.ProductModel = ProductModel;

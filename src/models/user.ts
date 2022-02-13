@@ -1,11 +1,5 @@
 import db from '../config/db';
-
-export type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  password: string;
-};
+import { User, InputUser } from '../@types/users';
 
 export class UserModel {
   async index(): Promise<User[]> {
@@ -38,7 +32,7 @@ export class UserModel {
     }
   }
 
-  async create(u: User): Promise<User> {
+  async create(u: InputUser): Promise<User> {
     try {
       const connection = await db.connect();
       // TODO: encrypt the password
@@ -54,33 +48,6 @@ export class UserModel {
     }
   }
 
-  // async update(u: User): Promise<User> {
-  //   try {
-  //     const connection = await db.connect();
-  //     const sql = `SELECT * FROM users WHERE id =${u.id}`;
-
-  //     const oldUser = await connection.query(sql);
-  //     const user = oldUser.rows[0]; 
-
-  //     // TODO: encrypt the user password  
-  //     const updatedUser = {
-  //       first_name: u.firstName || user.firstName,
-  //       last_name: u.lastName || user.lastName || user.lastName,
-  //       password: u.password || user.password,
-  //     };
-
-  //     const updateSql = `UPDATE users SET first_name = ${updatedUser.first_name}, last_name = ${updatedUser.last_name}, password = ${updatedUser.password} WHERE id = ${u.id} RETURNING *`;
-
-  //     const results = await connection.query(updateSql);
-
-  //     connection.release();
-
-  //     return results.rows[0];
-  //   } catch (err) {
-  //     throw new Error(`An error has occurred while updating user with user_id of ${id}. Error: ${err}`);
-  //   }
-  // }
-  
   async destroy(id: string): Promise<User> {
     try {
       const connection = await db.connect();
