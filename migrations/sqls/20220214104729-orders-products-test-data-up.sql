@@ -4,7 +4,7 @@ SELECT
   generate_series(1, num),
   CASE
     WHEN num < 11 THEN num
-    ELSE MOD(num, 11) + 1
+    ELSE 7
   END,
   floor(random() * 35 + 1)
 FROM
