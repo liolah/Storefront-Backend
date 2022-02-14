@@ -35,7 +35,7 @@ export class ProductModel {
   async create(p: InputProduct): Promise<Product> {
     try {
       const connection = await db.connect();
-      const sql = `INSERT INTO Products (name, price, category) VALUES (${p.name}, ${p.price}, ${p.category})`;
+      const sql = `INSERT INTO Products (name, price, category) VALUES ('${p.name}', '${p.price}', '${p.category}') RETURNING *`;
 
       const results = await connection.query(sql);
 
@@ -50,7 +50,7 @@ export class ProductModel {
   async destroy(id: string): Promise<Product> {
     try {
       const connection = await db.connect();
-      const sql = `DELETE FROM products WHERE id = ${id}`;
+      const sql = `DELETE FROM products WHERE id = ${id} RETURNING *`;
 
       const deletedProduct = await connection.query(sql);
 

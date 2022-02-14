@@ -28,7 +28,7 @@ export class UserModel {
 
       return results.rows[0];
     } catch (err) {
-      throw new Error(`An error has occurred while retrieving user with user_id of ${id}. Error: ${err}`);
+      throw new Error(`An error has occurred while retrieving user with user_id of: ${id}. Error: ${err}`);
     }
   }
 
@@ -36,7 +36,8 @@ export class UserModel {
     try {
       const connection = await db.connect();
       // TODO: encrypt the password
-      const sql = `INSERT INTO users (first_name, last_name, password) VALUES (${u.firstName}, ${u.lastName}, ${u.password})`;
+      const sql = `INSERT INTO users (first_name, last_name, password) VALUES ('${u.firstName}', '${u.lastName}', '${u.password}') RETURNING *`;
+      console.log(sql);
 
       const results = await connection.query(sql);
 
@@ -51,7 +52,7 @@ export class UserModel {
   async destroy(id: string): Promise<User> {
     try {
       const connection = await db.connect();
-      const sql = `DELETE FROM users WHERE id = ${id}`;
+      const sql = `DELETE FROM users WHERE id = ${id} RETURNING *`;
 
       const deletedUser = await connection.query(sql);
 

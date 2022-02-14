@@ -27,13 +27,13 @@ const create = async (req: Request, res: Response) => {
     const createdProduct = await product.create(newProduct);
     res.json(createdProduct);
   } catch (err) {
-    res.status(400);
-    res.json(err);
+    res.status(400).json(err);
   }
 };
 
 const destroy = async (req: Request, res: Response) => {
   const destroyedProduct = await product.destroy(req.params.productId);
+  res.json(destroyedProduct);
 };
 
 export { index, show, create, destroy };

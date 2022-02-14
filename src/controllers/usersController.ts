@@ -19,22 +19,21 @@ const create = async (req: Request, res: Response) => {
     const newUser: InputUser = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      password: req.body.password
+      password: req.body.password,
     };
-    
+
     // const validatedUser = validatedUser(newUser);
-    
-    console.log(req.body);
+
     const createdUser = await user.create(newUser);
     res.json(createdUser);
   } catch (err) {
-    res.status(400);
-    res.json(err);
+    res.status(400).json(err);
   }
 };
 
 const destroy = async (req: Request, res: Response) => {
   const destroyedUser = await user.destroy(req.params.userId);
+  res.json(destroyedUser);
 };
 
 export { index, show, create, destroy };
