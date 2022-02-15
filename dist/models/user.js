@@ -12,9 +12,9 @@ class UserModel {
             const connection = await db_1.default.connect();
             const sql = ` SELECT
                       id,
-                      first_name AS firstName,
-                      last_name AS lastName,
-                      password_digest AS passwordDigest 
+                      first_name AS "firstName",
+                      last_name AS "lastName",
+                      password_digest AS "passwordDigest" 
                     FROM
                       users`;
             const results = await connection.query(sql);
@@ -30,9 +30,9 @@ class UserModel {
             const connection = await db_1.default.connect();
             const sql = ` SELECT 
                       id,
-                      first_name AS firstName,
-                      last_name AS lastName,
-                      password_digest AS passwordDigest
+                      first_name AS "firstName",
+                      last_name AS "lastName",
+                      password_digest AS "passwordDigest"
                     FROM
                       users WHERE id =${id}`;
             const results = await connection.query(sql);
@@ -54,9 +54,9 @@ class UserModel {
                         '${u.lastName}',
                         '${(0, usersServices_1.encryptPassword)(u.password)}'
                       ) RETURNING id,
-                      first_name AS firstName,
-                      last_name AS lastName,
-                      password_digest AS passwordDigest`;
+                      first_name AS "firstName",
+                      last_name AS "lastName",
+                      password_digest AS "passwordDigest"`;
             const results = await connection.query(sql);
             connection.release();
             return results.rows[0];
@@ -70,9 +70,9 @@ class UserModel {
             const connection = await db_1.default.connect();
             const sql = ` DELETE FROM users WHERE id = ${id}
                     RETURNING id,
-                    first_name AS firstName,
-                    last_name AS lastName,
-                    password_digest AS passwordDigest`;
+                    first_name AS "firstName",
+                    last_name AS "lastName",
+                    password_digest AS "passwordDigest"`;
             const deletedUser = await connection.query(sql);
             connection.release();
             return deletedUser.rows[0];

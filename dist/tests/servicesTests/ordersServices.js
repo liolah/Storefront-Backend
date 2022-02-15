@@ -11,59 +11,59 @@ function default_1() {
                 products: [
                     {
                         id: 7,
-                        quantity: 10,
+                        quantity: 47,
                     },
                     {
                         id: 8,
-                        quantity: 13,
+                        quantity: 47,
                     },
                     {
                         id: 9,
-                        quantity: 10,
+                        quantity: 47,
                     },
                     {
                         id: 10,
-                        quantity: 30,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 31,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 1,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 14,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 29,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 13,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 23,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 29,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 34,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 24,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 34,
+                        quantity: 47,
                     },
                 ],
             },
@@ -76,19 +76,19 @@ function default_1() {
                 products: [
                     {
                         id: 7,
-                        quantity: 27,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 24,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 9,
+                        quantity: 47,
                     },
                     {
                         id: 7,
-                        quantity: 31,
+                        quantity: 47,
                     },
                 ],
             },

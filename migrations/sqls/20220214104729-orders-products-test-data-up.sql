@@ -6,6 +6,7 @@ SELECT
     WHEN num < 11 THEN num
     ELSE 7
   END,
-  floor(random() * 35 + 1)
+  -- floor(random() * 35 + 1)
+  47
 FROM
   generate_series(1, 20) num;

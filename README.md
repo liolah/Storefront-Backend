@@ -1,54 +1,54 @@
-# Storefront Backend Project
+## Storefront backend
 
-## Getting Started
+### Scripts:
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+###### npm run start
 
-## Required Technologies
-Your application must make use of the following libraries:
-- Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
+To start running the server with nodemon
 
-## Steps to Completion
+###### npm run build
 
-### 1. Plan to Meet Requirements
+To compile the project to js in /dist
 
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API. 
+###### npm run test
 
-Your first task is to read the requirements and update the document with the following:
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.    
-**Example**: A SHOW route: 'blogs/:id' [GET] 
+1. Runs the up migrations on the test database
+2. Starts tests with jasmine
+3. Runs down migrations to wipe the database again
 
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.   
-**Example**: You can format this however you like but these types of information should be provided
-Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
+### Database instructions
 
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape. 
+###### Development database
 
-### 2.  DB Creation and Migrations
+The development database should be named store_db and/or the credentials in the .env file should be modified to match the database you want to use.
 
-Now that you have the structure of the databse outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder. 
+###### Test Database
 
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
+The test database is called tests_db, it's selected by default. To switch to the dev database change ENV variable inside .env to dev.
 
-### 3. Models
+### Important notes
 
-Create the models for each database table. The methods in each model should map to the endpoints in `REQUIREMENTS.md`. Remember that these models should all have test suites and mocks.
+Before runnig tests, make sure that you have the required database with the correct name and check if the table names will conflict with any tables you might have in your db. THE TABLES WILL BE WIPED CLEAN AFTER EACH TEST.
 
-### 4. Express Handlers
+### Endpoints
 
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled. 
+GET /. Says welcome :)
+POST /login. takes user id and password and returns an auth token
+GET /users. shows all users in the db - [requires token]
+GET /users/:userId. to show a specific user. Each user can view only his data. [requires token]
+POST /users. to create a user. [requires token]
+DELETE /users/:userId. deletes the user. Each user can delete only his data. [requires token]
 
-### 5. JWTs
+---
 
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIUREMENTS.md`.
+GET /products. Shows all the products in the db
+GET /products/:productId. Shows a specific product with id of productId.
+GET /products/MostPopular. Shows top 5 popular products.
+GET /products/category/:category. Shows all the products within a specific category
+POST /products. Creates a new product. [requires token]
+DELETE /products/:productId. Deletes the product. [requires token]
 
-### 6. QA and `README.md`
+---
 
-Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
-
-Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+GET /user/:userId/orders. Shows the active orders for a specific users. Each user can view only his orders. [requires token]
+GET /user/:userId/orders/completed. Shows the completed orders for a specific user. Each user can view only his orders. [requires token]

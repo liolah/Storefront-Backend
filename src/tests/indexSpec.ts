@@ -6,6 +6,6 @@ import endpointsTests from './endpointsTests/index';
 
 productModelTests();
 userModelTests();
-// productsServicesTests();
-// ordersServicesTests();
+productsServicesTests();
+ordersServicesTests();
 endpointsTests();

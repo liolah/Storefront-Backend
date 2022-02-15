@@ -13,8 +13,8 @@ function default_1() {
             const response = await request.get('/');
             expect(response.status).toBe(200);
         });
-        it('GET /login', async () => {
-            const response = await request.get('/login');
+        it('POST /login', async () => {
+            const response = await request.post('/login').send({ id: '3', password: 'incorrect' });
             expect(response.status).toBe(200);
         });
         it('GET /users, without authToken', async () => {
@@ -47,13 +47,13 @@ function default_1() {
         });
         it('POST /users, without authToken', async () => {
             const response = await request
-                .post('/users/1')
+                .post('/users')
                 .send({ firstName: 'Hesham', lastName: 'Hany', password: 'Password' });
             expect(response.status).toBe(401);
         });
         it('POST /users, with authToken', async () => {
             const response = await request
-                .post('/users/1')
+                .post('/users')
                 .send({ firstName: 'Hesham', lastName: 'Hany', password: 'Password' })
                 .set('Authorization', `Bearer ${token}`);
             expect(response.status).toBe(200);
@@ -63,13 +63,13 @@ function default_1() {
             expect(response.status).toBe(200);
         });
         it('GET /products/:productId', async () => {
-            const response = await request.get('/products/1');
+            const response = await request.get('/products/5');
             expect(response.status).toBe(200);
             expect(response.body).toEqual({
-                id: 1,
-                name: 'product_1',
-                price: 73,
-                category: 'Healing potions',
+                id: 5,
+                name: 'product_5',
+                price: 47,
+                category: 'Power ups',
             });
         });
         it('GET /products/MostPopular', async () => {
@@ -81,27 +81,33 @@ function default_1() {
             expect(response.status).toBe(200);
             expect(response.body).toEqual([
                 {
-                    id: 1,
-                    name: 'product_1',
-                    price: 73,
-                    category: 'Healing potions',
+                    id: 8,
+                    name: 'product_8',
+                    price: 47,
+                    category: 'Gifts',
                 },
                 {
-                    id: 2,
-                    name: 'product_2',
-                    price: 34,
-                    category: 'Healing potions',
+                    id: 9,
+                    name: 'product_9',
+                    price: 47,
+                    category: 'Gifts',
+                },
+                {
+                    id: 10,
+                    name: 'product_10',
+                    price: 47,
+                    category: 'Gifts',
                 },
             ]);
         });
         it('POST /products, without authToken', async () => {
-            const response = await request.post('/products').send({ name: 'blablabla', price: 123, category: 'blablabla' });
+            const response = await request.post('/products').send({ name: 'blablabla', price: 47, category: 'blablabla' });
             expect(response.status).toBe(401);
         });
         it('POST /products, with authToken', async () => {
             const response = await request
                 .post('/products')
-                .send({ name: 'blablabla', price: 123, category: 'blablabla' })
+                .send({ name: 'blablabla', price: 47, category: 'blablabla' })
                 .set('Authorization', `Bearer ${token}`);
             expect(response.status).toBe(200);
         });

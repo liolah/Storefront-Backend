@@ -6,35 +6,35 @@ export default function (): void {
       {
         id: 7,
         name: 'product_7',
-        price: 86,
+        price: 47,
         category: 'Power ups',
         no_of_distinct_buyers: '10',
       },
       {
         id: 10,
         name: 'product_10',
-        price: 78,
+        price: 47,
         category: 'Gifts',
         no_of_distinct_buyers: '10',
       },
       {
         id: 9,
         name: 'product_9',
-        price: 19,
+        price: 47,
         category: 'Gifts',
         no_of_distinct_buyers: '9',
       },
       {
         id: 8,
         name: 'product_8',
-        price: 17,
+        price: 47,
         category: 'Gifts',
         no_of_distinct_buyers: '8',
       },
       {
         id: 6,
         name: 'product_6',
-        price: 40,
+        price: 47,
         category: 'Power ups',
         no_of_distinct_buyers: '6',
       },
@@ -43,19 +43,19 @@ export default function (): void {
       {
         id: 5,
         name: 'product_5',
-        price: 56,
+        price: 47,
         category: 'Power ups',
       },
       {
         id: 6,
         name: 'product_6',
-        price: 40,
+        price: 47,
         category: 'Power ups',
       },
       {
         id: 7,
         name: 'product_7',
-        price: 86,
+        price: 47,
         category: 'Power ups',
       },
     ];
@@ -68,12 +68,12 @@ export default function (): void {
       expect(getProductsByCategory).toBeDefined();
     });
 
-    it('getPopularProducts should return a list of products for a specific user ID', async () => {
+    it('getPopularProducts should return a list of the most popular products', async () => {
       const result = await getPopularProducts('5');
       expect(result).toEqual(popularProducts);
     });
 
-    it('Completed products function should return a list of completed products for a specific user', async () => {
+    it('getProductsByCategory should return a products list with a specific category', async () => {
       const result = await getProductsByCategory('Power ups');
       expect(result).toEqual(powerUps);
     });

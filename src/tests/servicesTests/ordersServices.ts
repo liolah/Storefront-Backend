@@ -1,7 +1,7 @@
 import { getOrderByUserId, completedOrders } from '../../services/ordersServices';
 
 export default function (): void {
-  describe('Products Services:', () => {
+  describe('Orders Services:', () => {
     const activeOrders = [
       {
         id: 7,
@@ -10,64 +10,63 @@ export default function (): void {
         products: [
           {
             id: 7,
-            quantity: 10,
+            quantity: 47,
           },
           {
             id: 8,
-            quantity: 13,
+            quantity: 47,
           },
           {
             id: 9,
-            quantity: 10,
+            quantity: 47,
           },
           {
             id: 10,
-            quantity: 30,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 31,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 1,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 14,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 29,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 13,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 23,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 29,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 34,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 24,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 34,
+            quantity: 47,
           },
         ],
       },
     ];
-
     const completeOrders = [
       {
         id: 17,
@@ -76,25 +75,25 @@ export default function (): void {
         products: [
           {
             id: 7,
-            quantity: 27,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 24,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 9,
+            quantity: 47,
           },
           {
             id: 7,
-            quantity: 31,
+            quantity: 47,
           },
         ],
       },
     ];
 
-    it("Should have a function to get users' orders", () => {
+    it("Should have a function to get users' active orders", () => {
       expect(getOrderByUserId).toBeDefined();
     });
 
@@ -102,7 +101,7 @@ export default function (): void {
       expect(completedOrders).toBeDefined();
     });
 
-    it('getOrderByUserId should return a list of orders for a specific user ID', async () => {
+    it('getOrderByUserId should return a list of active orders for a specific user ID', async () => {
       const result = await getOrderByUserId('7');
       expect(result).toEqual(activeOrders);
     });
@@ -112,5 +111,4 @@ export default function (): void {
       expect(result).toEqual(completeOrders);
     });
   });
-
 }

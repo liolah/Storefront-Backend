@@ -10,16 +10,15 @@ const { POSTGRES_HOST, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_T
 let db = new pg_1.Pool({
     host: POSTGRES_HOST,
     user: POSTGRES_USER,
-    database: POSTGRES_DB,
-    password: POSTGRES_PASSWORD,
+    database: POSTGRES_TEST_DB,
+    password: POSTGRES_TEST_DB_PASSWORD,
 });
-;
-if (ENV === 'test') {
+if (ENV === 'dev') {
     const db = new pg_1.Pool({
         host: POSTGRES_HOST,
         user: POSTGRES_USER,
-        database: POSTGRES_TEST_DB,
-        password: POSTGRES_TEST_DB_PASSWORD,
+        database: POSTGRES_DB,
+        password: POSTGRES_PASSWORD,
     });
 }
 exports.default = db;
