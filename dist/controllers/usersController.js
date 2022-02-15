@@ -16,22 +16,22 @@ exports.show = show;
 const create = async (req, res) => {
     try {
         const newUser = {
-            firstName: req.query.firstName,
-            lastName: req.query.lastName,
-            password: req.query.password
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            password: req.body.password,
         };
         // const validatedUser = validatedUser(newUser);
         const createdUser = await user.create(newUser);
         res.json(createdUser);
     }
     catch (err) {
-        res.status(400);
-        res.json(err);
+        res.status(400).json(err);
     }
 };
 exports.create = create;
 const destroy = async (req, res) => {
     const destroyedUser = await user.destroy(req.params.userId);
+    res.json(destroyedUser);
 };
 exports.destroy = destroy;
 exports.default = { index, show, create, destroy };

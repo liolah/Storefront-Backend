@@ -1,4 +1,5 @@
 import db from '../config/db';
+import { encryptPassword } from '../services/usersServices';
 import { User, InputUser } from '../@types/users';
 
 export class UserModel {
@@ -35,9 +36,18 @@ export class UserModel {
   async create(u: InputUser): Promise<User> {
     try {
       const connection = await db.connect();
-      // TODO: encrypt the password
-      const sql = `INSERT INTO users (first_name, last_name, password) VALUES ('${u.firstName}', '${u.lastName}', '${u.password}') RETURNING *`;
-      console.log(sql);
+
+      const sql = ` INSERT INTO
+                      users (first_name, last_name, password_digest)
+                    VALUES
+                      (
+                        '${u.firstName}',
+                        '${u.lastName}',
+                        '${encryptPassword(u.password)}'
+                      ) RETURNING id,
+                      first_name AS firstName,
+                      last_name AS lastName,
+                      password_digest`;
 
       const results = await connection.query(sql);
 

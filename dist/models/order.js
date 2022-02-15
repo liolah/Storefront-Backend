@@ -33,7 +33,7 @@ class OrderModel {
     async delete(id) {
         try {
             const connection = await db_1.default.connect();
-            const sql = `DELETE FROM orders WHERE id = ${id}`;
+            const sql = `DELETE FROM orders WHERE id = ${id} RETURNING *`;
             const deletedOrder = await connection.query(sql);
             connection.release();
             return deletedOrder.rows[0];

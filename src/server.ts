@@ -18,3 +18,5 @@ app.get('/', function (req: Request, res: Response) {
 app.listen(port, function () {
   console.log(`Server started running on ${address}`);
 });
+
+export default app;

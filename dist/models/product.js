@@ -33,7 +33,7 @@ class ProductModel {
     async create(p) {
         try {
             const connection = await db_1.default.connect();
-            const sql = `INSERT INTO Products (name, price, category) VALUES (${p.name}, ${p.price}, ${p.category})`;
+            const sql = `INSERT INTO Products (name, price, category) VALUES ('${p.name}', '${p.price}', '${p.category}') RETURNING *`;
             const results = await connection.query(sql);
             connection.release();
             return results.rows[0];
@@ -45,7 +45,7 @@ class ProductModel {
     async destroy(id) {
         try {
             const connection = await db_1.default.connect();
-            const sql = `DELETE FROM products WHERE id = ${id}`;
+            const sql = `DELETE FROM products WHERE id = ${id} RETURNING *`;
             const deletedProduct = await connection.query(sql);
             connection.release();
             return deletedProduct.rows[0];

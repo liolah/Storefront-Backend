@@ -8,7 +8,7 @@ const mostPopularProducts = async (req: Request, res: Response) => {
 };
 
 const getProductsByCategory = async (req: Request, res: Response) => {
-  const products = await productsServices.getProductsByCategory(req.body.category);
+  const products = await productsServices.getProductsByCategory(req.params.category);
   res.json(products);
 };
 
