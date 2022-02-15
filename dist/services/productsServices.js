@@ -11,7 +11,9 @@ async function getPopularProducts(x) {
         const sql = ` SELECT
                     products.id,
                     products.name,
-                    COUNT(DISTINCT users.id) AS no_of_distinct_users
+                    products.price,
+                    products.category,
+                    COUNT(DISTINCT users.id) AS no_of_distinct_buyers
                   FROM
                     users
                     LEFT JOIN orders on users.id = orders.user_id
@@ -20,7 +22,7 @@ async function getPopularProducts(x) {
                   GROUP BY
                     products.id
                   ORDER BY
-                    no_of_distinct_users DESC
+                    no_of_distinct_buyers DESC
                   LIMIT
                     ${x}`;
         const results = await connection.query(sql);
@@ -35,7 +37,8 @@ exports.getPopularProducts = getPopularProducts;
 async function getProductsByCategory(c) {
     try {
         const connection = await db_1.default.connect();
-        const sql = `SELECT * FROM products WHERE category = ${c}`;
+        const category = c.charAt(0).toUpperCase() + c.slice(1); // To make sure the first litter is always capitalized (important for the query)
+        const sql = `SELECT * FROM products WHERE category = '${category}'`;
         const results = await connection.query(sql);
         connection.release();
         return results.rows;

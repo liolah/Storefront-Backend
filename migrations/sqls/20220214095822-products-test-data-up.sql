@@ -2,7 +2,8 @@ INSERT INTO
   products (name, price, category)
 SELECT
   'product_' || seq,
-  floor(random() * 100 + 1),
+  -- floor(random() * 100 + 1),
+  47,
   CASE
     WHEN seq < 3 THEN 'Healing potions'
     WHEN seq >= 3

@@ -10,6 +10,6 @@ routes.get('/MostPopular', mostPopularProducts);
 routes.get('/category/:category', getProductsByCategory);
 routes.get('/:productId', show);
 routes.post('/', verifyAuthToken, create);
-routes.delete('/:productId', destroy);
+routes.delete('/:productId', verifyAuthToken, destroy);
 
 export default routes;

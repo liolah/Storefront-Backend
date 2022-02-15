@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "start": "nodemon src/server.ts",
-    "test": "ENV=test db-migrate --env test up && jasmine-ts && db-migrate db:drop test && ENV=dev",
+    "test": "db-migrate --env test up && jasmine-ts && db-migrate --env test reset",
     "tsc": "tsc",
     "prettier": "prettier --config .prettierrc src/*.ts --write",
     "build": "npx tsc"
@@ -16,6 +16,7 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.0",

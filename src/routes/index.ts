@@ -8,8 +8,8 @@ import { login } from '../handlers/usersServicesHandler';
 const routes = Router();
 
 routes.use('/users', verifyAuthToken, usersRoutes);
-routes.use('/products', productsRoutes);
 routes.post('/login', login);
-routes.use('/', verifyAuthToken, ordersRoutes);
+routes.use('/products', productsRoutes);
+routes.use('/', ordersRoutes);
 
 export default routes;

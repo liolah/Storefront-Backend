@@ -2,7 +2,6 @@ import db from '../config/db';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import { User } from '../@types/users';
 
 dotenv.config();
 
@@ -13,20 +12,31 @@ function encryptPassword(password: string): string {
   return bcrypt.hashSync(password + pepper, saltRounds);
 }
 
+function validatePassword(password: string, passwordDigest: string): boolean {
+  return bcrypt.compareSync(password + pepper, passwordDigest);
+}
+
 async function authenticate(id: string, password: string): Promise<string | null> {
   const conn = await db.connect();
-  const sql = `SELECT password_digest FROM users WHERE id = '${id}'`;
+  const sql = ` SELECT 
+                  id,
+                  first_name AS "firstName",
+                  last_name AS "lastName",
+                  password_digest AS "passwordDigest"
+                FROM
+                  users WHERE id = ${id}`;
+  
   const result = await conn.query(sql);
 
   if (result.rows.length) {
     const user = result.rows[0];
 
-    if (bcrypt.compareSync(password + pepper, user.password_digest)) {
+    if (validatePassword(password, user.passwordDigest)) {
       return jwt.sign(user, process.env.TOKEN_SECRET as string);
     }
   }
   return null;
 }
 
-export { encryptPassword, authenticate };
-export default { encryptPassword, authenticate };
+export { encryptPassword, validatePassword, authenticate };
+export default { encryptPassword, validatePassword, authenticate };

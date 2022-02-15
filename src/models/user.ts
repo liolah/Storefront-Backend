@@ -6,7 +6,13 @@ export class UserModel {
   async index(): Promise<User[]> {
     try {
       const connection = await db.connect();
-      const sql = 'SELECT * FROM users';
+      const sql = ` SELECT
+                      id,
+                      first_name AS "firstName",
+                      last_name AS "lastName",
+                      password_digest AS "passwordDigest" 
+                    FROM
+                      users`;
 
       const results = await connection.query(sql);
 
@@ -21,7 +27,13 @@ export class UserModel {
   async show(id: string): Promise<User> {
     try {
       const connection = await db.connect();
-      const sql = `SELECT * FROM users WHERE id =${id}`;
+      const sql = ` SELECT 
+                      id,
+                      first_name AS "firstName",
+                      last_name AS "lastName",
+                      password_digest AS "passwordDigest"
+                    FROM
+                      users WHERE id =${id}`;
 
       const results = await connection.query(sql);
 
@@ -45,9 +57,9 @@ export class UserModel {
                         '${u.lastName}',
                         '${encryptPassword(u.password)}'
                       ) RETURNING id,
-                      first_name AS firstName,
-                      last_name AS lastName,
-                      password_digest`;
+                      first_name AS "firstName",
+                      last_name AS "lastName",
+                      password_digest AS "passwordDigest"`;
 
       const results = await connection.query(sql);
 
@@ -62,7 +74,11 @@ export class UserModel {
   async destroy(id: string): Promise<User> {
     try {
       const connection = await db.connect();
-      const sql = `DELETE FROM users WHERE id = ${id} RETURNING *`;
+      const sql = ` DELETE FROM users WHERE id = ${id}
+                    RETURNING id,
+                    first_name AS "firstName",
+                    last_name AS "lastName",
+                    password_digest AS "passwordDigest"`;
 
       const deletedUser = await connection.query(sql);
 
