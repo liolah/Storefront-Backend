@@ -32,23 +32,34 @@ Before runnig tests, make sure that you have the required database with the corr
 
 ### Endpoints
 
-GET /. Says welcome :)
-POST /login. takes user id and password and returns an auth token
-GET /users. shows all users in the db - [requires token]
-GET /users/:userId. to show a specific user. Each user can view only his data. [requires token]
-POST /users. to create a user. [requires token]
-DELETE /users/:userId. deletes the user. Each user can delete only his data. [requires token]
+###### GET /. Says welcome :)
+
+###### POST /login. takes user id and password and returns an auth token
+
+###### GET /users. shows all users in the db - [requires token]
+
+###### GET /users/:userId. to show a specific user. Each user can view only his data. [requires token]
+
+###### POST /users. to create a user. [requires token]
+
+###### DELETE /users/:userId. deletes the user. Each user can delete only his data. [requires token]
 
 ---
 
-GET /products. Shows all the products in the db
-GET /products/:productId. Shows a specific product with id of productId.
-GET /products/MostPopular. Shows top 5 popular products.
-GET /products/category/:category. Shows all the products within a specific category
-POST /products. Creates a new product. [requires token]
-DELETE /products/:productId. Deletes the product. [requires token]
+###### GET /products. Shows all the products in the db
+
+###### GET /products/:productId. Shows a specific product with id of productId.
+
+###### GET /products/MostPopular. Shows top 5 popular products.
+
+###### GET /products/category/:category. Shows all the products within a specific category
+
+###### POST /products. Creates a new product. [requires token]
+
+###### DELETE /products/:productId. Deletes the product. [requires token]
 
 ---
 
-GET /user/:userId/orders. Shows the active orders for a specific users. Each user can view only his orders. [requires token]
-GET /user/:userId/orders/completed. Shows the completed orders for a specific user. Each user can view only his orders. [requires token]
+###### GET /user/:userId/orders. Shows the active orders for a specific users. Each user can view only his orders. [requires token]
+
+###### GET /user/:userId/orders/completed. Shows the completed orders for a specific user. Each user can view only his orders. [requires token]
