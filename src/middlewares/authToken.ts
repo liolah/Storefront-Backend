@@ -18,12 +18,10 @@ function verifyAuthToken(req: Request, res: Response, next: NextFunction) {
 }
 
 function authorize(req: Request, res: Response, next: NextFunction) {
-  if (req.body.id == req.params.id) {
+  if (req.body.id == req.params.userId) {
     next();
   } else {
-    res
-      .status(401)
-      .json("Access denied, Unauthorized. You don't have permission to carry this action on another user.");
+    res.status(401).json("Access denied. You don't have permission to carry this action on another user.");
   }
 }
 
