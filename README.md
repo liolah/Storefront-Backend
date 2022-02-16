@@ -26,6 +26,8 @@ The development database should be named store_db and/or the credentials in the 
 
 The test database is called tests_db, it's selected by default. To switch to the dev database change ENV variable inside .env to dev.
 
+For more detailed instructions, see REQUIREMENTS.md
+
 ### Important notes
 
 Before runnig tests, make sure that you have the required database with the correct name and check if the table names will conflict with any tables you might have in your db. THE TABLES WILL BE WIPED CLEAN AFTER EACH TEST.
