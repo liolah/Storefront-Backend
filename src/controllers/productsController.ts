@@ -1,17 +1,25 @@
-import express, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { ProductModel } from '../models/product';
 import { InputProduct } from '../@types/products';
 
 const product = new ProductModel();
 
 const index = async (_req: Request, res: Response) => {
-  const products = await product.index();
-  res.json(products);
+  try {
+    const products = await product.index();
+    res.json(products);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 };
 
 const show = async (req: Request, res: Response) => {
-  const requestedProduct = await product.show(req.params.productId);
-  res.json(requestedProduct);
+  try {
+    const requestedProduct = await product.show(req.params.productId);
+    res.json(requestedProduct);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 };
 
 const create = async (req: Request, res: Response) => {
@@ -21,9 +29,6 @@ const create = async (req: Request, res: Response) => {
       price: req.body.price as unknown as number,
       category: req.body.category as string,
     };
-
-    // const validatedProduct = validatedProduct(newProduct);
-
     const createdProduct = await product.create(newProduct);
     res.json(createdProduct);
   } catch (err) {
@@ -32,8 +37,12 @@ const create = async (req: Request, res: Response) => {
 };
 
 const destroy = async (req: Request, res: Response) => {
-  const destroyedProduct = await product.destroy(req.params.productId);
-  res.json(destroyedProduct);
+  try {
+    const destroyedProduct = await product.destroy(req.params.productId);
+    res.json(destroyedProduct);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 };
 
 export { index, show, create, destroy };

@@ -17,25 +17,29 @@ function validatePassword(password: string, passwordDigest: string): boolean {
 }
 
 async function authenticate(id: string, password: string): Promise<string | null> {
-  const conn = await db.connect();
-  const sql = ` SELECT 
+  try {
+    const conn = await db.connect();
+    const sql = ` SELECT 
                   id,
                   first_name AS "firstName",
                   last_name AS "lastName",
                   password_digest AS "passwordDigest"
                 FROM
                   users WHERE id = ${id}`;
-  
-  const result = await conn.query(sql);
 
-  if (result.rows.length) {
-    const user = result.rows[0];
+    const result = await conn.query(sql);
 
-    if (validatePassword(password, user.passwordDigest)) {
-      return jwt.sign(user, process.env.TOKEN_SECRET as string);
+    if (result.rows.length) {
+      const user = result.rows[0];
+
+      if (validatePassword(password, user.passwordDigest)) {
+        return jwt.sign(user, process.env.TOKEN_SECRET as string);
+      }
     }
+    return null;
+  } catch (err) {
+    throw new Error(`Auth error: ${err}`);
   }
-  return null;
 }
 
 export { encryptPassword, validatePassword, authenticate };

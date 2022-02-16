@@ -5,13 +5,21 @@ import { InputUser } from '../@types/users';
 const user = new UserModel();
 
 const index = async (_req: Request, res: Response) => {
-  const users = await user.index();
-  res.json(users);
+  try {
+    const users = await user.index();
+    res.json(users);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 };
 
 const show = async (req: Request, res: Response) => {
-  const requestedUser = await user.show(req.params.userId);
-  res.json(requestedUser);
+  try {
+    const requestedUser = await user.show(req.params.userId);
+    res.json(requestedUser);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 };
 
 const create = async (req: Request, res: Response) => {
@@ -21,9 +29,6 @@ const create = async (req: Request, res: Response) => {
       lastName: req.body.lastName,
       password: req.body.password,
     };
-
-    // const validatedUser = validatedUser(newUser);
-
     const createdUser = await user.create(newUser);
     res.json(createdUser);
   } catch (err) {
@@ -32,8 +37,12 @@ const create = async (req: Request, res: Response) => {
 };
 
 const destroy = async (req: Request, res: Response) => {
-  const destroyedUser = await user.destroy(req.params.userId);
-  res.json(destroyedUser);
+  try {
+    const destroyedUser = await user.destroy(req.params.userId);
+    res.json(destroyedUser);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 };
 
 export { index, show, create, destroy };
